@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">NMedia</string>
-    <string name="nmedia">NMedia!</string>
+    <string name="hello_message">NMedia!</string>
 </resources>
