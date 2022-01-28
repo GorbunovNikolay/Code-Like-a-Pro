@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="hello_message">NMedia!</string>
+    <string name="avatar" />
+    <string name="author" />
+    <string name="published" />
 </resources>
