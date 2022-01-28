@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">NMedia</string>
-    <string name="hello_message">NMedia!</string>
-    <string name="avatar" />
-    <string name="author" />
-    <string name="published" />
+    <string name="hello">Hello World!</string>
+    <string name="description_post_author_avatar">Post author avatar</string>
+    <string name="description_post_menu">Post menu</string>
+    <string name="likes" translatable="false" />
+    <string name="counter_likes" translatable="false" />
+    <string name="share" />
+    <string name="view" />
 </resources>
