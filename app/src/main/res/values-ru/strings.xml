@@ -4,4 +4,8 @@
     <string name="hello">Привет, Мир!</string>
     <string name="description_post_author_avatar">Аватар автора поста</string>
     <string name="description_post_menu">Меню поста</string>
+    <string name="likes">лайки</string>
+    <string name="counter_likes">лайки</string>
+    <string name="share">поделиться</string>
+    <string name="view">просмотры</string>
 </resources>

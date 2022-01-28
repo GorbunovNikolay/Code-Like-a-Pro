@@ -3,8 +3,8 @@
     <string name="hello">Hello World!</string>
     <string name="description_post_author_avatar">Post author avatar</string>
     <string name="description_post_menu">Post menu</string>
-    <string name="likes" translatable="false" />
-    <string name="counter_likes" translatable="false" />
-    <string name="share" translatable="false" />
-    <string name="view" translatable="false" />
+    <string name="likes" >likes</string>
+    <string name="counter_likes" >counter_likes</string>
+    <string name="share" >share</string>
+    <string name="view" >view</string>
 </resources>
