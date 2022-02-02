@@ -105,7 +105,7 @@
         tools:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
     <TextView
-        android:id="@+id/counter_likes"
+        android:id="@+id/likesCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
@@ -124,14 +124,14 @@
         android:minWidth="16dp"
         android:minHeight="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/likes"
-        app:layout_constraintStart_toEndOf="@+id/counter_likes"
+        app:layout_constraintStart_toEndOf="@+id/likesCount"
         app:layout_constraintTop_toTopOf="@+id/likes"
         app:srcCompat="@drawable/ic_baseline_share_24"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:srcCompat="@drawable/ic_baseline_share_24" />
 
     <TextView
-        android:id="@+id/counter_share"
+        android:id="@+id/shareCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/common_spacing"
