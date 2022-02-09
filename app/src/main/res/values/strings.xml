@@ -6,4 +6,10 @@
     <string name="description_post_like">Like</string>
     <string name="description_post_share">Share</string>
     <string name="view" translatable="false" />
+    <string name="post_remove">Remove</string>
+    <string name="content_hint">Content</string>
+    <string name="post_edit">Edit</string>
+    <string name="close_edit" translatable="false">closeEdit</string>
+    <string name="edit_message" translatable="false">edit_message</string>
+    <string name="cancel_edit_operation" translatable="false">cancel_edit_operation</string>
 </resources>
