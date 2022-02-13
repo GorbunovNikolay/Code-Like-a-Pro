@@ -45,14 +45,10 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             content.text = post.content
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
-            )
-            //отображаем счетчик лайков
-            likesCount.text = Calc.intToText(post.likesCount)
-            viewCount.text = Calc.intToText(5) //заглушка 5
-            //отображаем счетчик поделиться
-            shareCount.text = Calc.intToText(post.shareCount)
+            like.isChecked = post.likedByMe
+            like.text = Calc.intToText(post.likesCount)
+            share.text = Calc.intToText(post.shareCount)
+            view.text = Calc.intToText(5) //заглушка 5
             like.setOnClickListener {
                 actionListener.onLikeClick(post)
             }

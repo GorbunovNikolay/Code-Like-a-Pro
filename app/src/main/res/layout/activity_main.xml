@@ -40,10 +40,13 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/save"
+        style="@style/Widget.App.SaveCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checkable="true"
+        app:icon="@drawable/ic_baseline_check_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/edited"
@@ -81,17 +84,17 @@
         tools:visibility="visible"
         app:constraint_referenced_ids="cancel_caption,cancel_button" />
 
-    <ImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/cancel_button"
+        style="@style/Widget.App.CancelCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:checkable="true"
+        app:icon="@drawable/ic_baseline_close_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/cancel_caption"
         app:srcCompat="@drawable/ic_baseline_close_24" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
