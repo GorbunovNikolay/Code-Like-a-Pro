@@ -9,4 +9,6 @@
     <string name="post_remove">Удалить</string>
     <string name="content_hint">Содержание</string>
     <string name="post_edit">Редактировать</string>
+    <string name="edit">Редактировать</string>
+    <string name="play">Воспроизвести</string>
 </resources>

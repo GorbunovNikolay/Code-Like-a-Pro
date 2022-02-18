@@ -8,8 +8,12 @@
     <string name="view" translatable="false" />
     <string name="post_remove">Remove</string>
     <string name="content_hint">Content</string>
-    <string name="post_edit">Edit</string>
+    <string name="post_edit">Post Text</string>
+    <string name="chooser_share_post" translatable="false">Share post</string>
+    <string name="error_empty_content" translatable="false">Empty content</string>
     <string name="close_edit" translatable="false">closeEdit</string>
     <string name="edit_message" translatable="false">edit_message</string>
     <string name="cancel_edit_operation" translatable="false">cancel_edit_operation</string>
+    <string name="edit">Edit</string>
+    <string name="play">Play</string>
 </resources>
