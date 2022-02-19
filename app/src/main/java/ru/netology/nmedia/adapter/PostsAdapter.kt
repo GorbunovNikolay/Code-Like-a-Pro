@@ -3,6 +3,7 @@ package ru.netology.nmedia.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ interface ActionListener {
     fun onShareClick(post: Post)
     fun onRemoveClick(post: Post)
     fun onEditClick(post: Post)
+    fun onPlay(post: Post)
 }
 //typealias OnLikeListener = (post: Post) -> Unit
 //typealias OnShareListener = (post: Post) -> Unit
@@ -49,11 +51,15 @@ class PostViewHolder(
             like.text = Calc.intToText(post.likesCount)
             share.text = Calc.intToText(post.shareCount)
             view.text = Calc.intToText(5) //заглушка 5
+            playVideoView.isVisible = post.video != null
             like.setOnClickListener {
                 actionListener.onLikeClick(post)
             }
             share.setOnClickListener {
                 actionListener.onShareClick(post)
+            }
+            playVideoView.setOnClickListener {
+                actionListener.onPlay(post)
             }
             menu.setOnClickListener {
                 PopupMenu(binding.root.context, binding.menu).apply {
