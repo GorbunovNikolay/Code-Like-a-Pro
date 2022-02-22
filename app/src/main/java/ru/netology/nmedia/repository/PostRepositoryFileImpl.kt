@@ -56,6 +56,10 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
         sync()
     }
 
+    override fun getPost(id: Long): Post {
+        return posts.single { it.id == id }
+    }
+
     override fun save(post: Post) {
         if (post.id == 0L) {
             val newId = posts.firstOrNull()?.id ?: post.id

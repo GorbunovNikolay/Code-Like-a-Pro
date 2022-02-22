@@ -1,45 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Widget.App.LikeCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">@color/button_tint</item>
-        <item name="iconPadding">8dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textColor">?attr/colorControlNormal</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Widget.App.ShareCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="iconPadding">8dp</item>
-        <item name="android:minWidth">0dp</item>
+    <style name="AppCheckableButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">?attr/colorControlNormal</item>
-    </style>
-
-    <style name="Widget.App.ViewCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="iconPadding">8dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textColor">?attr/colorControlNormal</item>
-    </style>
-
-    <style name="Widget.App.MenuCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="iconPadding">8dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textColor">?attr/colorControlNormal</item>
-    </style>
-
-    <style name="Widget.App.SaveCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="iconPadding">8dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textColor">?attr/colorControlNormal</item>
-    </style>
-
-    <style name="Widget.App.CancelCheckBox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="iconPadding">8dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textColor">?attr/colorControlNormal</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
 
 </resources>

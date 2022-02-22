@@ -11,11 +11,24 @@
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed" >
         <action
-            android:id="@+id/action_feedFragment_to_newPostFragment"
-            app:destination="@id/newPostFragment" />
+            android:id="@+id/action_feedFragment_to_editPostFragment"
+            app:destination="@id/editPostFragment" />
+        <action
+            android:id="@+id/action_feedFragment_to_ownPostFragment"
+            app:destination="@id/ownPostFragment" />
     </fragment>
     <fragment
-        android:id="@+id/newPostFragment"
-        android:name="ru.netology.nmedia.activity.NewPostFragment"
-        android:label="NewPostFragment" />
+        android:id="@+id/editPostFragment"
+        android:name="ru.netology.nmedia.activity.EditPostFragment"
+        android:label="fragment_edit_post"
+        tools:layout="@layout/fragment_edit_post" />
+    <fragment
+        android:id="@+id/ownPostFragment"
+        android:name="ru.netology.nmedia.activity.OwnPostFragment"
+        android:label="fragment_own_post"
+        tools:layout="@layout/fragment_own_post" >
+        <action
+            android:id="@+id/action_ownPostFragment_to_editPostFragment"
+            app:destination="@id/editPostFragment" />
+    </fragment>
 </navigation>
