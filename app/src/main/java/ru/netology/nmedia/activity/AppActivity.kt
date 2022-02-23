@@ -32,8 +32,9 @@ class AppActivity : AppCompatActivity() {
                     }
                     .show()
             }
-            findNavController(R.id.navigation_fragment).navigate(R.id.action_feedFragment_to_newPostFragment
-            ,Bundle().apply { textArg = text })
+            findNavController(R.id.navigation_fragment).navigate(
+                R.id.action_feedFragment_to_newPostFragment,
+                Bundle().apply { textArg = text })
         }
     }
 }

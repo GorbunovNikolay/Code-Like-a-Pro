@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.netology.nmedia">
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+
+            <data android:scheme="*" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NMedia">
+        <activity
+            android:name=".activity.FragmentPost"
+            android:exported="false" />
         <activity
             android:name=".activity.AppActivity"
             android:exported="true">
@@ -26,10 +37,5 @@
             </intent-filter>
         </activity>
     </application>
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="*" />
-        </intent>
-    </queries>
+
 </manifest>

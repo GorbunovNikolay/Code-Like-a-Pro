@@ -18,6 +18,7 @@ interface ActionListener {
     fun onRemoveClick(post: Post)
     fun onEditClick(post: Post)
     fun onPlay(post: Post)
+    fun onOpenPost(post: Post)
 }
 //typealias OnLikeListener = (post: Post) -> Unit
 //typealias OnShareListener = (post: Post) -> Unit
@@ -61,6 +62,10 @@ class PostViewHolder(
             playVideoView.setOnClickListener {
                 actionListener.onPlay(post)
             }
+            content.setOnClickListener {
+                actionListener.onOpenPost(post)
+            }
+
             menu.setOnClickListener {
                 PopupMenu(binding.root.context, binding.menu).apply {
                     inflate(R.menu.post_menu)

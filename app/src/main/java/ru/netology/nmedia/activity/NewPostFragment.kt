@@ -1,10 +1,8 @@
 package ru.netology.nmedia.activity
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,25 +30,18 @@ class NewPostFragment : Fragment() {
         val viewModel: PostViewModel by viewModels(::requireParentFragment)
 
         binding.cancelButton.setOnClickListener {
-//            activity?.setResult(Activity.RESULT_CANCELED)
-//            activity?.finish()
             findNavController().navigateUp()
         }
 
-//        intent?.getStringExtra(Intent.EXTRA_TEXT)?.let {
-//            binding.content.setText(it)
             binding.content.requestFocus()
             binding.save.setOnClickListener {
                 val text = binding.content.text.toString()
                 if (text.isNotBlank()) {
                     viewModel.changeContent(text)
                     viewModel.save()
-//                    activity?.setResult(Activity.RESULT_OK, Intent().apply { putExtra(Intent.EXTRA_TEXT, text) })
                 }
-//                activity?.finish()
                 findNavController().navigateUp()
             }
-//        }
 
         return binding.root
     }

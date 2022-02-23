@@ -31,9 +31,10 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
     override fun getAll(): LiveData<List<Post>> = data
     override fun likeById(id: Long) {
         posts = posts.map {
-           if (it.id != id) it else it.copy(
-               likesCount = if (it.likedByMe) it.likesCount - 1 else it.likesCount + 1,
-               likedByMe = !it.likedByMe)
+            if (it.id != id) it else it.copy(
+                likesCount = if (it.likedByMe) it.likesCount - 1 else it.likesCount + 1,
+                likedByMe = !it.likedByMe
+            )
         }
         data.value = posts
         sync()
@@ -42,7 +43,8 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
     override fun shareById(id: Long) {
         posts = posts.map {
             if (it.id != id) it else it.copy(
-                shareCount = it.shareCount + 1)
+                shareCount = it.shareCount + 1
+            )
         }
         data.value = posts
         sync()
@@ -70,6 +72,10 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
         }
         data.value = posts
         sync()
+    }
+
+    override fun getPostById(id: Long): Post {
+        return posts.single { it.id == id }
     }
 
     private fun sync() {

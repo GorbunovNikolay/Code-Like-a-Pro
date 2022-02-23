@@ -114,4 +114,9 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
         data.value = posts
     }
+
+    override fun getPostById(id: Long): Post {
+        TODO("Not yet implemented")
+    }
+
 }

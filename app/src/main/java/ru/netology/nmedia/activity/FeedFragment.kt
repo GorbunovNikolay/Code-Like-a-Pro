@@ -8,14 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
-import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
 import ru.netology.nmedia.adapter.ActionListener
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FragmentFeedBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.util.StringArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class FeedFragment : Fragment() {
@@ -27,12 +26,6 @@ class FeedFragment : Fragment() {
         val binding = FragmentFeedBinding.inflate(layoutInflater)
 
         val viewModel: PostViewModel by viewModels(::requireParentFragment)
-//        val newPostContract = registerForActivityResult(NewPostFragment.Contract()) { result ->
-//            result?.let {
-//                viewModel.changeContent(it)
-//                viewModel.save()
-//            }
-//        }
 
         val adapter = PostsAdapter(
             object : ActionListener {
@@ -63,6 +56,12 @@ class FeedFragment : Fragment() {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
                     startActivity(intent)
                 }
+
+                override fun onOpenPost(post: Post) {
+                    findNavController().navigate(R.id.action_feedFragment_to_fragmentPost
+                        ,Bundle().apply { textArg = post.id.toString() })
+                    viewModel.getPostById(post.id)
+                }
             }
         )
 
@@ -72,7 +71,6 @@ class FeedFragment : Fragment() {
         }
 
         binding.add.setOnClickListener {
-//            newPostContract.launch("")
             findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
         }
 
@@ -85,5 +83,9 @@ class FeedFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    companion object {
+        var Bundle.textArg: String? by StringArg
     }
 }

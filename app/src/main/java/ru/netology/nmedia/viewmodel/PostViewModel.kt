@@ -10,8 +10,8 @@ import ru.netology.nmedia.repository.PostRepositorySharedPrefsImpl
 
 val empty = Post(
     id = 0L,
-    "",
-    "",
+    "Me",
+    "Now",
     "",
     false,
 )
@@ -23,6 +23,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun likeById(id: Long) = repository.likeById(id)
     fun shareById(id: Long) = repository.shareById(id)
     fun removeById(id: Long) = repository.removeById(id)
+    fun getPostById(id: Long) = repository.getPostById(id)
 
     val edited = MutableLiveData(empty)
 
@@ -37,7 +38,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = post
     }
 
-    fun changeContent(content: String){
+    fun changeContent(content: String) {
         edited.value?.let {
             if (it.content == content) {
                 return
