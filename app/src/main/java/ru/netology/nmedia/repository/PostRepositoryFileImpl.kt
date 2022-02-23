@@ -7,13 +7,14 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.nmedia.dto.Post
 
-class PostRepositoryFileImpl(val context: Context) : PostRepository {
+
+class PostRepositoryFileImpl(private val context: Context) : PostRepository {
 
     private val gson = Gson()
     private val type = TypeToken.getParameterized(List::class.java, Post::class.java).type
     private val filename = "posts.json"
+    private var postId = 1L
     private var posts = emptyList<Post>()
-
     private val data = MutableLiveData(posts)
 
     init {
@@ -29,11 +30,16 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
     }
 
     override fun getAll(): LiveData<List<Post>> = data
+
     override fun likeById(id: Long) {
         posts = posts.map {
-           if (it.id != id) it else it.copy(
-               likesCount = if (it.likedByMe) it.likesCount - 1 else it.likesCount + 1,
-               likedByMe = !it.likedByMe)
+            if (it.id == id) {
+                if (!it.likedByMe) {
+                    it.copy(likedByMe = !it.likedByMe, likes = it.likes + 1)
+                } else {
+                    it.copy(likedByMe = !it.likedByMe, likes = it.likes - 1)
+                }
+            } else it
         }
         data.value = posts
         sync()
@@ -41,33 +47,34 @@ class PostRepositoryFileImpl(val context: Context) : PostRepository {
 
     override fun shareById(id: Long) {
         posts = posts.map {
-            if (it.id != id) it else it.copy(
-                shareCount = it.shareCount + 1)
+            if (it.id == id) it.copy(shares = it.shares + 1) else it
         }
         data.value = posts
         sync()
     }
 
     override fun removeById(id: Long) {
-        posts = posts.filter {
-            it.id != id
-        }
+        posts = posts.filter { it.id != id }
         data.value = posts
         sync()
     }
 
+    override fun findById(id: Long): Post? {
+        return posts.find { it.id == id }
+    }
+
     override fun save(post: Post) {
         if (post.id == 0L) {
-            val newId = posts.firstOrNull()?.id ?: post.id
-            posts = listOf(post.copy(id = newId + 1)) + posts
+            posts = listOf(post.copy(id = postId++,
+                author = "Me",
+                likedByMe = false,
+                published = "now")
+            ) + posts
             data.value = posts
             sync()
             return
         }
-
-        posts = posts.map {
-            if (it.id != post.id) it else it.copy(content = post.content)
-        }
+        posts = posts.map { if (it.id != post.id) it else it.copy(content = post.content) }
         data.value = posts
         sync()
     }

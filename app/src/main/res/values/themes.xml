@@ -13,4 +13,40 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="like_button"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">@color/button_tint_selector</item>
+        <item name="minWidth">@dimen/buttonSize</item>
+        <item name="minHeight">@dimen/buttonSize</item>
+        </style>
+
+    <style name="share_button"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="minWidth">@dimen/buttonSize</item>
+        <item name="minHeight">@dimen/buttonSize</item>
+    </style>
+
+    <style name="view_button"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="minWidth">@dimen/buttonSize</item>
+        <item name="minHeight">@dimen/buttonSize</item>
+    </style>
+
+    <style name="menu_button"
+        parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="minWidth">@dimen/buttonSize</item>
+        <item name="minHeight">@dimen/buttonSize</item>
+    </style>
+
+    <style name="play_button"
+        parent="Widget.Design.FloatingActionButton">
+        <item name="backgroundTint">#d32f2f</item>
+        <item name="minWidth">@dimen/buttonSize</item>
+        <item name="minHeight">@dimen/buttonSize</item>
+    </style>
+
 </resources>
