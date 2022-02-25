@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     def core_version = "1.7.0"
     def appcompat_version = "1.4.0"
     def mdc_version = "1.4.0"

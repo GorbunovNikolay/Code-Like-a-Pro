@@ -10,8 +10,8 @@ import ru.netology.nmedia.repository.PostRepositorySharedPrefsImpl
 
 val empty = Post(
     id = 0L,
-    "",
-    "",
+    "Me",
+    "Now",
     "",
     false,
 )
@@ -37,7 +37,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         edited.value = post
     }
 
-    fun changeContent(content: String){
+    fun changeContent(content: String) {
         edited.value?.let {
             if (it.content == content) {
                 return
