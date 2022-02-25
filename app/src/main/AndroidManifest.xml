@@ -18,9 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NMedia">
         <activity
-            android:name=".activity.FragmentPost"
-            android:exported="false" />
-        <activity
             android:name=".activity.AppActivity"
             android:exported="true">
             <intent-filter>
