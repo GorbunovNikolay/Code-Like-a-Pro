@@ -31,7 +31,6 @@ class FragmentPost : Fragment() {
         val binding = FragmentPostBinding.inflate(layoutInflater)
         val viewModel: PostViewModel by viewModels(::requireParentFragment)
         val postId = arguments?.textArg?.toLong()
-        val post = postId?.let { viewModel.getPostById(it) }
         //  binding.postContent.content для доступа из родителя
 
         if (postId != null) {
@@ -45,30 +44,6 @@ class FragmentPost : Fragment() {
                     binding.postContent.share.text = Calc.intToText(post.shareCount)
                     binding.postContent.view.text = Calc.intToText(5) //заглушка 5
                     binding.postContent.playVideoView.isVisible = post.video != null
-
-                    binding.postContent.like.setOnClickListener {
-                            if (post.id != postId) it else post.copy(
-                                likesCount = if (post.likedByMe) post.likesCount - 1 else post.likesCount + 1,
-                                likedByMe = !post.likedByMe
-                            )
-                        viewModel.save()
-                    }
-                    binding.postContent.share.setOnClickListener {
-                        val intent = Intent().apply {
-                            action = Intent.ACTION_SEND
-                            type = "text/plain"
-                            putExtra(Intent.EXTRA_TEXT, post.content)
-                        }
-                        val shareIntent =
-                            Intent.createChooser(intent, getString(R.string.chooser_share_post))
-                        startActivity(shareIntent)
-                        viewModel.shareById(post.id)
-                        viewModel.save()
-                    }
-                    binding.postContent.playVideoView.setOnClickListener {
-                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(post.video))
-                        startActivity(intent)
-                    }
 
                     binding.postContent.menu.setOnClickListener {
                         PopupMenu(binding.root.context, binding.postContent.menu).apply {
@@ -95,15 +70,6 @@ class FragmentPost : Fragment() {
                     }
                 }
             }
-        }
-
-        viewModel.edited.observe(viewLifecycleOwner) { post ->
-            if (post.id == 0L) {
-                return@observe
-            }
-            findNavController().navigate(
-                R.id.action_fragmentPost_to_newPostFragment,
-                Bundle().apply { textArg = post.content })
         }
 
         return binding.root
