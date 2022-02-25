@@ -20,7 +20,11 @@
     <fragment
         android:id="@+id/newPostFragment"
         android:name="ru.netology.nmedia.activity.NewPostFragment"
-        android:label="NewPostFragment" />
+        android:label="NewPostFragment" >
+        <action
+            android:id="@+id/action_newPostFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentPost"
         android:name="ru.netology.nmedia.activity.FragmentPost"
@@ -28,5 +32,8 @@
         <action
             android:id="@+id/action_fragmentPost_to_newPostFragment"
             app:destination="@id/newPostFragment" />
+        <action
+            android:id="@+id/action_fragmentPost_to_feedFragment"
+            app:destination="@id/feedFragment" />
     </fragment>
 </navigation>

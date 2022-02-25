@@ -60,7 +60,7 @@ class FeedFragment : Fragment() {
                 override fun onOpenPost(post: Post) {
                     findNavController().navigate(R.id.action_feedFragment_to_fragmentPost
                         ,Bundle().apply { textArg = post.id.toString() })
-                    viewModel.getPostById(post.id)
+//                    viewModel.getPostById(post.id)
                 }
             }
         )
