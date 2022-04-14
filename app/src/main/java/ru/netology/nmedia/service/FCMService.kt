@@ -1,6 +1,5 @@
 package ru.netology.nmedia.service
 
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -35,18 +34,11 @@ class FCMService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
+
         message.data[action]?.let {
-            try {
-                val enum = Action.valueOf(it)
-                when (enum) {
-                    Action.LIKE -> handleLike(gson.fromJson(message.data[content],
-                        Like::class.java))
-                    Action.NEWPOST -> handlePost(gson.fromJson(message.data[content],
-                        NewPost::class.java))
-                }
-            } catch (e: IllegalArgumentException) {
-                //исключение
-            }
+           when (Action.valueOf(it)) {
+              Action.LIKE -> handleLike(gson.fromJson(message.data[content], Like::class.java))
+           }
         }
     }
 
@@ -70,27 +62,10 @@ class FCMService : FirebaseMessagingService() {
         NotificationManagerCompat.from(this)
             .notify(Random.nextInt(100_000), notification)
     }
-
-    private fun handlePost(content: NewPost) {
-        val notification = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(
-                getString(
-                    R.string.notification_new_post,
-                    content.postAuthor,
-                    content.text,
-                )
-            )
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
-
-        NotificationManagerCompat.from(this)
-            .notify(Random.nextInt(100_000), notification)
-    }
 }
 
 enum class Action {
-    LIKE,NEWPOST
+    LIKE,
 }
 
 data class Like(
@@ -98,10 +73,5 @@ data class Like(
     val userName: String,
     val postId: Long,
     val postAuthor: String,
-)
-
-data class NewPost(
-    val postAuthor: String,
-    val text: String
 )
 

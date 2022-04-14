@@ -1,13 +1,11 @@
 package ru.netology.nmedia.dto
 
 data class Post(
-    val id: Long = 0L,
+    val id: Long,
     val author: String,
-    val published: String,
     val content: String,
-    val likedByMe: Boolean = false,
-    val likesCount: Int = 0,
-    val shareCount: Int = 0,
-    val viewCount: Int = 0,
-    val video: String? = null
+    val published: String,
+    val likedByMe: Boolean,
+    val likes: Int = 0,
 )
+
