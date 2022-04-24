@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
@@ -28,12 +29,16 @@ class FeedFragment : Fragment() {
         val binding = FragmentFeedBinding.inflate(inflater, container, false)
 
         val adapter = PostsAdapter(object : OnInteractionListener {
+
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
+                val bundle = Bundle().apply { putString("content", post.content) }
+                findNavController().navigate(R.id.action_feedFragment_to_newPostFragment, bundle)
             }
 
             override fun onLike(post: Post) {
-                if (!post.likedByMe) viewModel.likeById(post.id) else viewModel.disLikeById(post.id)
+                if (!post.likedByMe) viewModel.likeById(post.id) else viewModel.unlikeById(post.id)
+                //viewModel.likeById(post.id)
             }
 
             override fun onRemove(post: Post) {
@@ -41,6 +46,7 @@ class FeedFragment : Fragment() {
             }
 
             override fun onShare(post: Post) {
+                viewModel.shareById(post.id)
                 val intent = Intent().apply {
                     action = Intent.ACTION_SEND
                     putExtra(Intent.EXTRA_TEXT, post.content)
@@ -51,8 +57,14 @@ class FeedFragment : Fragment() {
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
             }
+
+            override fun onViews(post: Post) {
+                viewModel.viewsById(post.id)
+            }
         })
         binding.list.adapter = adapter
+        binding.list.animation = null
+
         viewModel.data.observe(viewLifecycleOwner, { state ->
             adapter.submitList(state.posts)
             binding.progress.isVisible = state.loading
@@ -68,13 +80,10 @@ class FeedFragment : Fragment() {
             findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
         }
 
-
         binding.swipeRefresh.setOnRefreshListener {
             viewModel.loadPosts()
             binding.swipeRefresh.isRefreshing = false
         }
-
-
         return binding.root
     }
 }

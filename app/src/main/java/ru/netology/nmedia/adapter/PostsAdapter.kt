@@ -1,20 +1,27 @@
 package ru.netology.nmedia.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.CardPostBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.enumeration.AttachmentType
+
+private const val BASE_URL = "http://10.0.2.2:9999"
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
     fun onShare(post: Post) {}
+    fun onViews(post: Post) {}
 }
 
 class PostsAdapter(
@@ -44,6 +51,30 @@ class PostViewHolder(
             // в адаптере
             like.isChecked = post.likedByMe
             like.text = "${post.likes}"
+            share.text = "${post.shares}"
+            views.text = "${post.views}"
+            imageAttachment.visibility = if (post.attachment != null) View.VISIBLE else View.GONE
+
+            Glide.with(avatar)
+                .load("${BASE_URL}/avatars/${post.authorAvatar}")
+                .transform(CircleCrop())
+                .placeholder(R.drawable.ic_loading_100dp)
+                .error(R.drawable.ic_error_100dp)
+                .timeout(10_000)
+                .into(avatar)
+
+            post.attachment?.apply {
+                when (AttachmentType.values().first()) {
+                    AttachmentType.IMAGE -> {
+                        Glide.with(imageAttachment)
+                            .load("${BASE_URL}/images/${this.url}")
+                            .placeholder(R.drawable.ic_loading_100dp)
+                            .error(R.drawable.ic_error_100dp)
+                            .timeout(10_000)
+                            .into(imageAttachment)
+                    }
+                }
+            }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
@@ -73,6 +104,9 @@ class PostViewHolder(
                 onInteractionListener.onShare(post)
             }
 
+            views.setOnClickListener {
+                onInteractionListener.onViews(post)
+            }
         }
     }
 }
