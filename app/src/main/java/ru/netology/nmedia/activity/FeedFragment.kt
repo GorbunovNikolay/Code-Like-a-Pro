@@ -2,21 +2,27 @@ package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FragmentFeedBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.model.FeedModelState
 import ru.netology.nmedia.viewmodel.PostViewModel
+import java.lang.reflect.Array.get
+import kotlin.math.absoluteValue
 
 class FeedFragment : Fragment() {
 
@@ -56,23 +62,36 @@ class FeedFragment : Fragment() {
             }
         })
         binding.list.adapter = adapter
-        viewModel.data.observe(viewLifecycleOwner) { state ->
-            adapter.submitList(state.posts)
+        viewModel.dataState.observe(viewLifecycleOwner, { state ->
             binding.progress.isVisible = state.loading
-            binding.errorGroup.isVisible = state.error
-            binding.emptyText.isVisible = state.empty
-
+            binding.swiperefresh.isRefreshing = state.refreshing
             if (state.error) {
-                Toast.makeText(activity, R.string.error_description, Toast.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, R.string.error_loading, Snackbar.LENGTH_LONG)
+                    .setAction(R.string.retry_loading) { viewModel.loadPosts() }
+                    .show()
             }
-        }
+        })
+        viewModel.data.observe(viewLifecycleOwner, { state ->
+            adapter.submitList(state.posts)
+            binding.emptyText.isVisible = state.empty
+        })
 
-        binding.retryButton.setOnClickListener {
-            viewModel.loadPosts()
+        binding.swiperefresh.setOnRefreshListener {
+            viewModel.refreshPosts()
         }
 
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+        }
+
+        viewModel.newerCount.observe(viewLifecycleOwner, {
+            binding.fabNewPosts.isVisible = it > 0
+        })
+
+        binding.fabNewPosts.setOnClickListener {
+            viewModel.showNewPosts()
+            binding.fabNewPosts.isVisible = false
+            binding.list.smoothScrollBy(0, 0)
         }
 
         return binding.root
